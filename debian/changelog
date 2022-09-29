@@ -1,0 +1,49 @@
+golang-google-protobuf (1.27.1-1) unstable; urgency=medium
+
+  [ Anthony Fok ]
+  * Bump build-dependency on golang-github-google-go-cmp-dev to (>= 0.5.0)
+    as per go.mod
+  * Bump build-dependency on dh-golang to (>= 1.48~)
+    to prevent "no non-test Go files" errors on backports
+
+  [ Shengjing Zhu ]
+  * New upstream version v1.27.1
+  * Update Standards-Version to 4.6.0 (no changes)
+
+ -- Shengjing Zhu <zhsj@debian.org>  Sun, 29 Aug 2021 02:43:11 +0800
+
+golang-google-protobuf (1.25.0+git20201208.160c747-1) unstable; urgency=medium
+
+  [ Debian Janitor (Jelmer Vernooĳ) ]
+  * Set upstream metadata fields: Repository, Repository-Browse.
+
+  [ Anthony Fok ]
+  * New upstream version 1.25.0+git20201208.160c747
+    - all: fix tests for 32-bit architectures
+      See https://go-review.googlesource.com/c/protobuf/+/241537
+      Fixes #1168 at https://github.com/golang/protobuf/issues/1168
+    - cmd/protoc-gen-go: remove reference to legacy ProtoPackageIsVersion4
+      See https://go-review.googlesource.com/c/protobuf/+/259901
+      Fixes #1077 at https://github.com/golang/protobuf/issues/1077
+      (Closes: #961814)
+  * debian/watch: Fetch from Git HEAD temporarily to get fixes for GitHub
+      issues #1077 and #1168 as listed above (now reverted)
+  * debian/control:
+    - Change Section from devel to golang
+    - Bump Standards-Version to 4.5.1 (no change)
+    - Add myself to the list of Uploaders
+
+ -- Anthony Fok <foka@debian.org>  Tue, 05 Jan 2021 08:17:15 -0700
+
+golang-google-protobuf (1.25.0-1) unstable; urgency=medium
+
+  * New upstream version 1.25.0
+  * Remove golang-github-google-go-cmp-dev from Depends
+
+ -- Shengjing Zhu <zhsj@debian.org>  Tue, 07 Jul 2020 23:47:40 +0800
+
+golang-google-protobuf (1.23.0-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #960798)
+
+ -- Shengjing Zhu <zhsj@debian.org>  Sun, 17 May 2020 14:48:12 +0800

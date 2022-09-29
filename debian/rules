@@ -1,0 +1,7 @@
+#!/usr/bin/make -f
+
+export DH_GOLANG_EXCLUDES      := benchmarks internal/cmd
+export DH_GOLANG_INSTALL_EXTRA := $(shell echo internal/fuzz/*/corpus)
+
+%:
+	dh $@ --buildsystem=golang --with=golang

@@ -1,2 +1,2 @@
 # Testdata
-executable-not-elf-or-script usr/share/gocode/src/google.golang.org/protobuf/internal/fuzz/*/corpus/*
+executable-not-elf-or-script [usr/share/gocode/src/google.golang.org/protobuf/internal/fuzz/*/corpus/*]

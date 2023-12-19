@@ -1,0 +1,44 @@
+From 31694dbe3b1d3118bc146344338d9d1e043eefec Mon Sep 17 00:00:00 2001
+From: Michael Stapelberg <stapelberg@golang.org>
+Date: Thu, 27 Jul 2023 09:58:06 +0200
+Subject: [PATCH] types/dynamicpb: make atomicExtFiles the first word of the
+ struct
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This fixes a panic (“unaligned 64-bit atomic operation”).
+
+fixes https://github.com/golang/protobuf/issues/1555
+
+Change-Id: I9da73993abff54edc7d4a0ee7287b9d43f5ff766
+Reviewed-on: https://go-review.googlesource.com/c/protobuf/+/513575
+Reviewed-by: Lasse Folger <lassefolger@google.com>
+---
+ types/dynamicpb/types.go | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/types/dynamicpb/types.go b/types/dynamicpb/types.go
+index 5a8010f1..a5c57ed3 100644
+--- a/types/dynamicpb/types.go
++++ b/types/dynamicpb/types.go
+@@ -26,10 +26,17 @@ type extField struct {
+ // Types implements protoregistry.MessageTypeResolver and protoregistry.ExtensionTypeResolver.
+ // A Types may be used as a proto.UnmarshalOptions.Resolver.
+ type Types struct {
++	// atomicExtFiles is used with sync/atomic and hence must be the first word
++	// of the struct to guarantee 64-bit alignment.
++	//
++	// TODO(stapelberg): once we only support Go 1.19 and newer, switch this
++	// field to be of type atomic.Uint64 to guarantee alignment on
++	// stack-allocated values, too.
++	atomicExtFiles uint64
++	extMu          sync.Mutex
++
+ 	files *protoregistry.Files
+ 
+-	extMu               sync.Mutex
+-	atomicExtFiles      uint64
+ 	extensionsByMessage map[extField]protoreflect.ExtensionDescriptor
+ }
+ 

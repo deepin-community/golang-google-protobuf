@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: protobuf-go
 Source: https://github.com/protocolbuffers/protobuf-go
+Upstream-Name: protobuf-go
 
 Files: *
 Copyright: 2018-2020 The Go Authors
